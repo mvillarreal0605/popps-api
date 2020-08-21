@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyText
+  first_name: MyText
+  last_name: MyText
+  nick_name: MyText
+  email: MyText
+  cell_number: MyText
+  passwd_hash: MyText
+  pin: 1
+  age_at_signup: 1
+  date_of_signup: 2020-08-21 14:55:12
+  admin_flg: false
+  create_time: 2020-08-21 14:55:12
+  update_time: 2020-08-21 14:55:12
+
+two:
+  user_id: MyText
+  first_name: MyText
+  last_name: MyText
+  nick_name: MyText
+  email: MyText
+  cell_number: MyText
+  passwd_hash: MyText
+  pin: 1
+  age_at_signup: 1
+  date_of_signup: 2020-08-21 14:55:12
+  admin_flg: false
+  create_time: 2020-08-21 14:55:12
+  update_time: 2020-08-21 14:55:12

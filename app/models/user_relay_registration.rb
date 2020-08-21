@@ -1,0 +1,2 @@
+class UserRelayRegistration < ApplicationRecord
+end

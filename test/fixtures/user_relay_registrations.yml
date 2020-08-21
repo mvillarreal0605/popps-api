@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyText
+  device_guid: MyText
+  device_description: MyText
+  usage_count: 1
+  create_time: 2020-08-21 14:49:54
+  update_time: 2020-08-21 14:49:54
+
+two:
+  user_id: MyText
+  device_guid: MyText
+  device_description: MyText
+  usage_count: 1
+  create_time: 2020-08-21 14:49:54
+  update_time: 2020-08-21 14:49:54
