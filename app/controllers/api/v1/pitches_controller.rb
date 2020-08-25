@@ -44,7 +44,7 @@ class Api::V1::PitchesController < Api::V1::BaseController
   end
 
   def render_error
-    render json: { errors: @urr.errors.full_messages },
+    render json: { errors: @pitch.errors.full_messages },
       status: :unprocessable_entity
   end
 end
