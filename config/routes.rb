@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :user_relay_registrations, only: [ :index, :show, :update, :create, :destroy ]
+      resources :users, only: [ :index, :show, :update, :create, :destroy ]
+      resources :pitches, only: [ :index, :show, :update, :create, :destroy ]
+      resources :sessions, only: [ :index, :show, :update, :create, :destroy ]
     end
   end
 
