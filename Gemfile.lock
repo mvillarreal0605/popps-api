@@ -227,6 +227,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
+  devise
   faker!
   jbuilder (~> 2.7)
   jquery-rails

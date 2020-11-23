@@ -28,7 +28,8 @@ pin = 1234
     date_of_signup: Time.zone.now,
     admin_flg: false,
     create_time: Time.zone.now,
-    update_time:Time.zone.now
+    update_time:Time.zone.now,
+    password: :passwd_hash
   })
   user_id += 1
   pin += 1
