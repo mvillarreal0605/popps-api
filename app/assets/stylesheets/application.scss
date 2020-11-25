@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+
+ @import 'bootstrap/scss/bootstrap';
+ @import 'config/colors';
+
+ #navbar {
+  display: flex;
+  justify-content: space-between;
+ }
+
+ .banner {
+  height: 100vh;
+  display: flex;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), image-url('infield');
+  h1 {
+    color: white;
+    font-weight: bold;
+    font-size: 45px;
+  }
+  p {
+    color: white;
+    // opacity: 0.8;
+    font-size: 25px;
+    font-weight: lighter;
+    margin-bottom: 30px;
+  }
+}
