@@ -17,10 +17,9 @@
  @import 'bootstrap/scss/bootstrap';
  @import 'config/colors';
 
- #navbar {
-  display: flex;
-  justify-content: space-between;
- }
+  body {
+    position: relative;
+  }
 
  .banner {
   height: 100vh;
@@ -41,5 +40,26 @@
     font-size: 25px;
     font-weight: lighter;
     margin-bottom: 30px;
+    }
   }
+
+.section {
+  height: 100vh;
+}
+
+ #bs-navbar {
+  display: flex;
+  justify-content: space-between;
+ }
+
+#about {
+  background-color: blue;
+}
+
+#baseball {
+  background-color: red;
+}
+
+#contact {
+  background-color: green;
 }

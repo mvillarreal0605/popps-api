@@ -2,14 +2,16 @@
 <html>
   <head>
     <title>Precise-Play</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag 'popps-white' %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#bs-navbar">
     <%= yield %>
+    <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag 'navLinks' %>
   </body>
 </html>
