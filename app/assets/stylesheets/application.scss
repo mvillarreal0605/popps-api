@@ -43,23 +43,29 @@
     }
   }
 
-.section {
-  height: 100vh;
-}
+  .navbar-custom {
+    display: flex;
+    justify-content: space-between;
+    transition: 0.75s background-color ease;
+  }
 
- #bs-navbar {
-  display: flex;
-  justify-content: space-between;
- }
+  .navbar-blue {
+    background-color: $popps-blue;
+    box-shadow: 0 5px 15px rgba(0,0,0,.07);
+  }
 
-#about {
-  background-color: blue;
-}
+  .section {
+    height: 100vh;
+  }
 
-#baseball {
-  background-color: red;
-}
+  #about {
+    background-color: blue;
+  }
 
-#contact {
-  background-color: green;
-}
+  #baseball {
+    background-color: red;
+  }
+
+  #contact {
+    background-color: green;
+  }

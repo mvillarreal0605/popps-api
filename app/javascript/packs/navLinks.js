@@ -1,6 +1,6 @@
 const navLinks = () => {
 
-  const navbarLinks = document.querySelectorAll('.nav_list_link');
+  const navbarLinks = document.querySelectorAll('.nav_link');
 
   navbarLinks.forEach((link) => {
    link.addEventListener('click', () => {
