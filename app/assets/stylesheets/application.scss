@@ -104,3 +104,17 @@
   .inquiry-error {
     color: $color-2;
   }
+
+  .social {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    list-style: none;
+    h1 {
+      color: $color-1;
+      padding: 0px 16px 0px;
+    }
+    h1:hover {
+      color: $color-3;
+    }
+  }
