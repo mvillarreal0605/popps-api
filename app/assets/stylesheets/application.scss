@@ -21,6 +21,7 @@
     position: relative;
     background-color: $color-4;
     color: $color-5;
+    font-family: 'Open Sans', sans-serif;
   }
 
  .banner {
@@ -33,17 +34,24 @@
   background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), image-url('infield');
   h1 {
     color: $color-4;
-    font-weight: bold;
-    font-size: 45px;
+    // font-weight: bold;
+    font-size: 64px;
+    font-family: 'Lobster', cursive;
   }
   p {
     color: $color-4;
-    // opacity: 0.8;
+    opacity: 0.8;
     font-size: 25px;
-    font-weight: lighter;
+    // font-weight: lighter;
     margin-bottom: 30px;
+    font-family: 'Roboto', sans-serif;
     }
   }
+
+  // h2 {
+  //   margin-top: 76px;
+  //   margin-left: 16px;
+  // }
 
   .navbar-custom {
     display: flex;
