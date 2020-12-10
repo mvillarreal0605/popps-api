@@ -19,6 +19,8 @@
 
   body {
     position: relative;
+    background-color: $color-4;
+    color: $color-5;
   }
 
  .banner {
@@ -30,12 +32,12 @@
   text-align: center;
   background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), image-url('infield');
   h1 {
-    color: white;
+    color: $color-4;
     font-weight: bold;
     font-size: 45px;
   }
   p {
-    color: white;
+    color: $color-4;
     // opacity: 0.8;
     font-size: 25px;
     font-weight: lighter;
@@ -50,22 +52,48 @@
   }
 
   .navbar-blue {
-    background-color: $popps-blue;
+    background-color: $color-1;
     box-shadow: 0 5px 15px rgba(0,0,0,.07);
   }
+
+  // .avatar {
+  //   height: 40px;
+  // }
 
   .section {
     height: 100vh;
   }
 
   #about {
-    background-color: blue;
+    // background-color: blue;
   }
 
   #baseball {
-    background-color: red;
+    background-color: $color-2;
   }
 
   #contact {
-    background-color: green;
+    // background-color: green;
+  }
+
+  .btn-flat {
+    color: $color-4;
+    padding: 8px 24px;
+    border-radius: 4px;
+    background-color: $color-1;
+    transition: background 0.3s ease;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  }
+
+  .btn-flat:hover {
+    background-color: $color-3;
+    color: $color-4;
+    cursor: pointer;
+  }
+
+  .inquiry-error {
+    color: $color-2;
   }

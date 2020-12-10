@@ -17,4 +17,20 @@
 
 <div id="contact" class="section">
   <h2>Contact</h2>
+  <div class="container">
+    <%= simple_form_for @inquiry do |f| %>
+      <h4><%= f.input :name, required: true, placeholder: 'John Doe', class: "form-control is-invalid" %></h4>
+      <div  class="inquiry-error" id="name-error"></div>
+      <br>
+      <h4><%= f.input :phone_number, required: true, placeholder: '816-555-5555' %></h4>
+      <div  class="inquiry-error" id="phone-error"></div>
+      <br>
+      <h4><%= f.input :email, required: true, placeholder: 'your.email@example.com' %></h4>
+      <div  class="inquiry-error" id="email-error"></div>
+      <br>
+      <h4><%= f.input :organization, placeholder: 'Are you with a team or academy?' %></h4>
+      <br>
+      <%= f.button :submit, "Submit Inquiry", class: "btn btn-flat", id: 'submit-inquiry' %>
+    <% end %>
+  </div>
 </div>

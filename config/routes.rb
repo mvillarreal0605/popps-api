@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  get 'inquiries/create'
   root to: 'pages#home'
+
+  resources :inquiries, only: :create
 
   devise_for :users
 
