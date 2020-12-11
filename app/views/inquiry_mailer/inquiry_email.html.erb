@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>New inquiry for business!</h1>
+    <h4><%= @inquiry.name %> has filled out the form on your website.</h4>
+    <% if @inquiry.organization %>
+      <h4>Organization: <%= @inquiry.organization %></h4>
+    <% end %>
+    <h4>
+      You may contact them back at: <%= @inquiry.email %> or <%= @inquiry.phone_number %>.
+    </h4>
+  </body>
+</html>

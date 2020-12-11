@@ -3,7 +3,7 @@ class InquiriesController < ApplicationController
     @inquiry = Inquiry.new(inquiry_params)
 
     if @inquiry.save
-      # InquiryMailer.inquiry_email(@inquiry).deliver_now
+      InquiryMailer.inquiry_email(@inquiry).deliver_now
       # ConfirmationMailer.confirmation_email(@inquiry).deliver_now
       redirect_to root_path
     end
