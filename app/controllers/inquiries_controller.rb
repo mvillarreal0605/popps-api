@@ -5,6 +5,7 @@ class InquiriesController < ApplicationController
     if @inquiry.save
       InquiryMailer.inquiry_email(@inquiry).deliver_now
       # ConfirmationMailer.confirmation_email(@inquiry).deliver_now
+      flash[:notice] = "Success: Your inquiry has been received."
       redirect_to root_path
     end
   end

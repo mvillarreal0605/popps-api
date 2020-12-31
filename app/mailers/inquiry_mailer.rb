@@ -1,5 +1,5 @@
 class InquiryMailer < ApplicationMailer
-  default from: 'notifications@preciseplayllc.com'
+  default from: 'notifications@playprecise.com'
 
   def inquiry_email(inquiry)
     @inquiry = inquiry
