@@ -19,7 +19,8 @@
 
   body {
     position: relative;
-    background-color: $color-4;
+    // background-color: $color-4;
+    background-color: rgb(245,245,245);
     color: $color-5;
     font-family: 'Open Sans', sans-serif;
   }
@@ -67,12 +68,34 @@
   //   height: 40px;
   // }
 
+  .container {
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-around;
+    padding: 84px 0px;
+  }
+
+  .popps-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
   .section {
-    height: 100vh;
+    min-height: 100vh;
   }
 
   #about {
     // background-color: blue;
+  }
+
+  #intro {
+    line-height: 150%;
+    text-align: left;
+  }
+
+  .lg-img {
+    height: auto;
   }
 
   #baseball {
@@ -82,6 +105,11 @@
   #contact {
     // background-color: green;
   }
+
+  // #contact-content {
+  //   display: flex;
+  //   flex-direction: column;
+  // }
 
   .btn-flat {
     color: $color-4;

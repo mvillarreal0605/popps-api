@@ -11,6 +11,24 @@
 
 <div id="about" class="section">
   <h2>About</h2>
+  <div class="container col-8">
+    <center>
+      <%= image_tag "popps-blue", alt: "popps logo", class: 'col-5 lg-img', id: 'diamond' %>
+    </center>
+    <br>
+    <div class="popps-row">
+      <%= image_tag "graph", alt: "strike-zone image" %>
+
+      <h3 class="col-6" id="intro">Hello! We are Precise Play LLC, an engineering firm that specializes in sports related technology. We currently have a product lineup of various pitch analyzers. This lineup of technology allows baseball pitchers to keep track of every pitch during their practice sessions. Players can track this data, and their own personal progress through the Precise Play platform.</h3>
+
+      <!-- Hello! We are Precise Play LLC, an engineering firm that specializes in sports related technology. We currently have a product lineup of various pitch analyzers. This lineup of technology allows baseball pitchers to keep track of every pitch during their practice sessions. Players can track this data, and their own personal progress through the Precise Play platform. -->
+    </div>
+    <br>
+    <br>
+    <center>
+      <%= image_tag "diamond", alt: "baseball-diamond", class: 'col-7 lg-img', id: 'diamond' %>
+    </center>
+  </div>
 </div>
 
 <div id="baseball" class="section">
@@ -20,12 +38,10 @@
 <div id="contact" class="section">
   <h2>Contact</h2>
 
-  <br>
-
-  <div class="container">
-    <div class="inquiry-form">
+  <div class="container col-8">
+    <div class="inquiry-form col-6">
       <%= simple_form_for @inquiry do |f| %>
-        <h4><%= f.input :name, required: true, placeholder: 'John Doe', class: "form-control is-invalid" %></h4>
+        <h4><%= f.input :name, required: true, placeholder: 'John Doe' %></h4>
         <div  class="inquiry-error" id="name-error"></div>
         <br>
         <h4><%= f.input :phone_number, required: true, placeholder: '816-555-5555' %></h4>
