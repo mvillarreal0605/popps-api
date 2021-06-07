@@ -1,0 +1,18 @@
+<%= stylesheet_link_tag 'mailers', media: 'all' %>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans&family=Roboto:wght@500&display=swap');
+</style>
+
+<center><%= email_image_tag('popps-white.png', id: 'popps-logo', alt: 'logo') %></center>
+<center><h1>Precise Play</h1></center>
+<br>
+<center>
+  <div class="message">
+      <p><%= @inquiry.name %> just filled out the form on Precise Play's website.</p>
+      <p><strong>You may contact them back at:</strong></p>
+      <p>Email: <%= @inquiry.email %></p>
+      <p>or</p>
+      <p>Phone number: <%= @inquiry.phone_number %></p>
+    </div>
+</center>
+<br>
