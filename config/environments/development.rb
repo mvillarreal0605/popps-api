@@ -33,6 +33,14 @@ Rails.application.configure do
 
 
 
+  config.action_mailer.asset_host = 'http://localhost:3000'
+
+  config.action_controller.asset_host = 'http://localhost:3000'
+
+  config.assets.css_compressor = :sass
+
+
+
   config.action_mailer.raise_delivery_errors = true
   Rails.application.routes.default_url_options[:host] = "localhost:3000"
   # config.action_mailer.default_url_options = { :host => 'localhost:3000', protocol: 'http' }

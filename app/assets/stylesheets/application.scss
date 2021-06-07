@@ -25,6 +25,24 @@
     font-family: 'Open Sans', sans-serif;
   }
 
+// Navbar
+
+  .navbar-custom {
+    display: flex;
+    justify-content: space-between;
+    transition: 0.75s background-color ease;
+  }
+
+  .navbar-blue {
+    background-color: $color-1;
+    box-shadow: 0 5px 15px rgba(0,0,0,.07);
+  }
+
+  // #bs-navbar {
+  //   display: flex;
+  //   justify-content: space-between;
+  // }
+
  .banner {
   height: 100vh;
   display: flex;
@@ -53,16 +71,6 @@
     padding: 16px 0px 0px 16px;
   }
 
-  .navbar-custom {
-    display: flex;
-    justify-content: space-between;
-    transition: 0.75s background-color ease;
-  }
-
-  .navbar-blue {
-    background-color: $color-1;
-    box-shadow: 0 5px 15px rgba(0,0,0,.07);
-  }
 
   // .avatar {
   //   height: 40px;
