@@ -14,143 +14,164 @@
  *= require_self
  */
 
- @import 'bootstrap/scss/bootstrap';
- @import 'config/colors';
+@import 'bootstrap/scss/bootstrap';
+@import 'config/colors';
+@import 'vendor/theme';
 
-  body {
-    position: relative;
-    // background-color: $color-4;
-    background-color: rgb(245,245,245);
-    color: $color-5;
-    font-family: 'Open Sans', sans-serif;
-  }
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
 
-// Navbar
+//  @import 'bootstrap/scss/bootstrap';
+//  @import 'config/colors';
 
-  .navbar-custom {
-    display: flex;
-    justify-content: space-between;
-    transition: 0.75s background-color ease;
-  }
+//   body {
+//     position: relative;
+//     // background-color: $color-4;
+//     background-color: rgb(245,245,245);
+//     color: $color-5;
+//     font-family: 'Open Sans', sans-serif;
+//   }
 
-  .navbar-blue {
-    background-color: $color-1;
-    box-shadow: 0 5px 15px rgba(0,0,0,.07);
-  }
+// // Navbar
 
-  // #bs-navbar {
-  //   display: flex;
-  //   justify-content: space-between;
-  // }
+//   .navbar-custom {
+//     display: flex;
+//     justify-content: space-between;
+//     transition: 0.75s background-color ease;
+//   }
 
- .banner {
-  height: 100vh;
-  display: flex;
-  background-size: cover;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), image-url('infield');
-  h1 {
-    color: $color-4;
-    // font-weight: bold;
-    font-size: 64px;
-    font-family: 'Lobster', cursive;
-  }
-  p {
-    color: $color-4;
-    opacity: 0.8;
-    font-size: 25px;
-    // font-weight: lighter;
-    margin-bottom: 30px;
-    font-family: 'Roboto', sans-serif;
-    }
-  }
+//   .navbar-blue {
+//     background-color: $color-1;
+//     box-shadow: 0 5px 15px rgba(0,0,0,.07);
+//   }
 
-  h2 {
-    padding: 16px 0px 0px 16px;
-  }
+//   // #bs-navbar {
+//   //   display: flex;
+//   //   justify-content: space-between;
+//   // }
+
+//  .banner {
+//   height: 100vh;
+//   display: flex;
+//   background-size: cover;
+//   justify-content: center;
+//   align-items: center;
+//   text-align: center;
+//   background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), image-url('infield');
+//   h1 {
+//     color: $color-4;
+//     // font-weight: bold;
+//     font-size: 64px;
+//     font-family: 'Lobster', cursive;
+//   }
+//   p {
+//     color: $color-4;
+//     opacity: 0.8;
+//     font-size: 25px;
+//     // font-weight: lighter;
+//     margin-bottom: 30px;
+//     font-family: 'Roboto', sans-serif;
+//     }
+//   }
+
+//   h2 {
+//     padding: 16px 0px 0px 16px;
+//   }
 
 
-  // .avatar {
-  //   height: 40px;
-  // }
+//   // .avatar {
+//   //   height: 40px;
+//   // }
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    // justify-content: space-around;
-    padding: 84px 0px;
-  }
+//   .container {
+//     display: flex;
+//     flex-direction: column;
+//     // justify-content: space-around;
+//     padding: 84px 0px;
+//   }
 
-  .popps-row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
+//   .popps-row {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-around;
+//   }
 
-  .section {
-    min-height: 100vh;
-  }
+//   .section {
+//     min-height: 100vh;
+//   }
 
-  #about {
-    // background-color: blue;
-  }
+//   #about {
+//     // background-color: blue;
+//   }
 
-  #intro {
-    line-height: 150%;
-    text-align: left;
-  }
+//   #intro {
+//     line-height: 150%;
+//     text-align: left;
+//   }
 
-  .lg-img {
-    height: auto;
-  }
+//   .lg-img {
+//     height: auto;
+//   }
 
-  #baseball {
-    background-color: $color-2;
-  }
+//   #baseball {
+//     background-color: $color-2;
+//   }
 
-  #contact {
-    // background-color: green;
-  }
+//   #contact {
+//     // background-color: green;
+//   }
 
-  // #contact-content {
-  //   display: flex;
-  //   flex-direction: column;
-  // }
+//   // #contact-content {
+//   //   display: flex;
+//   //   flex-direction: column;
+//   // }
 
-  .btn-flat {
-    color: $color-4;
-    padding: 8px 24px;
-    border-radius: 4px;
-    background-color: $color-1;
-    transition: background 0.3s ease;
-    a {
-      color: white;
-      text-decoration: none;
-    }
-  }
+//   .btn-flat {
+//     color: $color-4;
+//     padding: 8px 24px;
+//     border-radius: 4px;
+//     background-color: $color-1;
+//     transition: background 0.3s ease;
+//     a {
+//       color: white;
+//       text-decoration: none;
+//     }
+//   }
 
-  .btn-flat:hover {
-    background-color: $color-3;
-    color: $color-4;
-    cursor: pointer;
-  }
+//   .btn-flat:hover {
+//     background-color: $color-3;
+//     color: $color-4;
+//     cursor: pointer;
+//   }
 
-  .inquiry-error {
-    color: $color-2;
-  }
+//   .inquiry-error {
+//     color: $color-2;
+//   }
 
-  .social {
-    display: flex;
-    flex-direction: row;
-    padding: 0px;
-    list-style: none;
-    h1 {
-      color: $color-1;
-      padding: 0px 16px 0px;
-    }
-    h1:hover {
-      color: $color-3;
-    }
-  }
+//   .social {
+//     display: flex;
+//     flex-direction: row;
+//     padding: 0px;
+//     list-style: none;
+//     h1 {
+//       color: $color-1;
+//       padding: 0px 16px 0px;
+//     }
+//     h1:hover {
+//       color: $color-3;
+//     }
+//   }
+
