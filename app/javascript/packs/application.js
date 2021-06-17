@@ -17,7 +17,9 @@ require("@rails/activestorage").start()
 // const imagePath = (name) => images(name, true)
 
 import "flickity";
-import "font-awesome/scss/font-awesome.scss";
+require('mousetrap');
+require('jquery.transit');
+require("font-awesome/scss/font-awesome.scss");
 require("isotope/src/isotope.scss");
 require("isotope/src/marvel.css");
 import "lightbox";
@@ -27,5 +29,5 @@ import "parallax";
 require("../vendor/alerts/alert");
 require("../vendor/contact/contact");
 require("../vendor/reservation/reservation");
-require("../src/theme");
+require("~/app/javascript/src/theme");
 require("../src/theme.min");

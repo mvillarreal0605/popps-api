@@ -1,153 +1,123 @@
-<!doctype html>
-<html lang="en">
-  <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/ico/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/ico/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/ico/favicon-16x16.png">
-  <link rel="manifest" href="assets/ico/manifest.json">
-  <link rel="mask-icon" href="assets/ico/safari-pinned-tab.svg" color="#5bbad5">
-  <link rel="shortcut icon" href="assets/ico/favicon.ico">
-  <meta name="msapplication-config" content="assets/ico/browserconfig.xml">
-  <meta name="theme-color" content="#ffffff">
+<!-- NAVBAR
+================================================== -->
+<%= render "shared/navbar" %>
 
-  <title>Precise Play</title>
+<!-- WELCOME
+================================================== -->
+<%= render "shared/welcome" %>
 
-  <!-- CSS Plugins -->
-  <!-- <link rel="stylesheet" href="assets/stylesheets/plugins/font-awesome/css/all.min.css"> -->
-  <link rel="stylesheet" href="assets/stylesheets/plugins/lightbox/css/lightbox.min.css">
-  <link rel="stylesheet" href="assets/stylesheets/plugins/flickity/flickity.min.css">
+<!-- DISCOVER
+================================================== -->
+<%= render "shared/discover" %>
 
-  <!-- CSS Global -->
-  <!-- build:css assets/css/theme.min.css -->
-  <!-- endbuild -->
+<!-- ABOUT
+================================================== -->
+<%= render "shared/about" %>
 
-  </head>
-  <body>
+<!-- MENU
+================================================== -->
+<%= render "shared/menu" %>
 
-  <!-- NAVBAR
-  ================================================== -->
-  <%= render "shared/navbar" %>
+<!-- DISHES
+================================================== -->
+<%= render "shared/dishes" %>
 
-  <!-- WELCOME
-  ================================================== -->
-  <%= render "shared/welcome" %>
+<!-- RESERVATION
+================================================== -->
+<%= render "shared/reservation" %>
 
-  <!-- DISCOVER
-  ================================================== -->
-  <%= render "shared/discover" %>
+<!-- TESTIMONIALS
+================================================== -->
+<%= render "shared/testimonials" %>
 
-  <!-- ABOUT
-  ================================================== -->
-  <%= render "shared/about" %>
+<!-- EVENTS
+================================================== -->
+<%= render "shared/events" %>
 
-  <!-- MENU
-  ================================================== -->
-  <%= render "shared/menu" %>
+<!-- NEWSLETTER
+================================================== -->
+<%= render "shared/newsletter" %>
 
-  <!-- DISHES
-  ================================================== -->
-  <%= render "shared/dishes" %>
+<!-- NEWSLETTER CLONE
+================================================== -->
+<!--
+  MailChimp newsletters generally cannot be used more than
+  once on a page, because this will cause HTML IDs conflict.
+  This section solves this problem by calling the
+  original sign-up form and imitating its behaviour. Please
+  don't use it without the original sign-up form. Remove
+  d-none to make it visible.
+-->
+<section class="section section_gray section_newsletter d-none">
+  <div class="container">
+    <div class="row">
+      <div class="col">
 
-  <!-- RESERVATION
-  ================================================== -->
-  <%= render "shared/reservation" %>
+        <!-- Heading -->
+        <h2 class="section__heading section_newsletter__heading text-center">
+          Newsletter
+        </h2>
+        <p class="section__subheading text-center">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
+        </p>
 
-  <!-- TESTIMONIALS
-  ================================================== -->
-  <%= render "shared/testimonials" %>
+      </div>
+    </div> <!-- / .row -->
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
 
-  <!-- EVENTS
-  ================================================== -->
-  <%= render "shared/events" %>
-
-  <!-- NEWSLETTER
-  ================================================== -->
-  <%= render "shared/newsletter" %>
-
-  <!-- NEWSLETTER CLONE
-  ================================================== -->
-  <!--
-    MailChimp newsletters generally cannot be used more than
-    once on a page, because this will cause HTML IDs conflict.
-    This section solves this problem by calling the
-    original sign-up form and imitating its behaviour. Please
-    don't use it without the original sign-up form. Remove
-    d-none to make it visible.
-  -->
-  <section class="section section_gray section_newsletter d-none">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-
-          <!-- Heading -->
-          <h2 class="section__heading section_newsletter__heading text-center">
-            Newsletter
-          </h2>
-          <p class="section__subheading text-center">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
-          </p>
-
-        </div>
-      </div> <!-- / .row -->
-      <div class="row justify-content-center">
-        <div class="col-lg-6">
-
-          <!-- Form -->
-          <form class="section_newsletter__form section_newsletter__form_clone">
-            <div class="row">
-              <div class="form-group col-md-9">
-                <label class="sr-only">E-mail address</label>
-                <input type="email" class="form-control" placeholder="Email address">
-              </div>
-              <div class="col-md-3 text-center">
-                <button type="submit" class="btn btn-primary">
-                  Subscribe
-                </button>
-              </div>
+        <!-- Form -->
+        <form class="section_newsletter__form section_newsletter__form_clone">
+          <div class="row">
+            <div class="form-group col-md-9">
+              <label class="sr-only">E-mail address</label>
+              <input type="email" class="form-control" placeholder="Email address">
             </div>
-          </form>
+            <div class="col-md-3 text-center">
+              <button type="submit" class="btn btn-primary">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </form>
 
-        </div>
-      </div> <!-- / .row -->
-    </div> <!-- / .container -->
-  </section>
+      </div>
+    </div> <!-- / .row -->
+  </div> <!-- / .container -->
+</section>
 
-  <!-- GALLERY
-  ================================================== -->
-  <%= render "shared/gallery" %>
+<!-- GALLERY
+================================================== -->
+<%= render "shared/gallery" %>
 
-  <!-- MAP
-  ================================================== -->
-  <%= render "shared/map" %>
+<!-- MAP
+================================================== -->
+<%= render "shared/map" %>
 
-  <!-- FOOTER
-  ================================================== -->
-  <%= render "shared/footer" %>
+<!-- FOOTER
+================================================== -->
+<%= render "shared/footer" %>
 
-  <!-- JAVASCRIPT
-  ================================================== -->
+<!-- JAVASCRIPT
+================================================== -->
 
-  <!-- JS Global -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnKt8_N4-FKOnhI_pSaDL7g_g-XI1-R9E"></script>
+<!-- JS Global -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnKt8_N4-FKOnhI_pSaDL7g_g-XI1-R9E"></script>
 
-  <!-- JS Plugins -->
-  <!-- <script src="assets/plugins/parallax/parallax.min.js"></script>
-  <script src="assets/plugins/isotope/lib/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/plugins/isotope/isotope.pkgd.min.js"></script>
-  <script src="assets/plugins/flickity/flickity.pkgd.min.js"></script>
-  <script src="assets/plugins/lightbox/js/lightbox.min.js"></script>
-  <script src="assets/plugins/reservation/reservation.js"></script>
-  <script src="assets/plugins/alerts/alerts.js"></script> -->
+<!-- JS Plugins -->
+<!-- <script src="assets/plugins/parallax/parallax.min.js"></script>
+<script src="assets/plugins/isotope/lib/imagesloaded.pkgd.min.js"></script>
+<script src="assets/plugins/isotope/isotope.pkgd.min.js"></script>
+<script src="assets/plugins/flickity/flickity.pkgd.min.js"></script>
+<script src="assets/plugins/lightbox/js/lightbox.min.js"></script>
+<script src="assets/plugins/reservation/reservation.js"></script>
+<script src="assets/plugins/alerts/alerts.js"></script> -->
 
-  <!-- JS Custom -->
-  <!-- build:js assets/js/theme.min.js -->
-  <script src="assets/js/theme.js"></script>
-  <!-- endbuild -->
-  <script src="assets/js/custom.js"></script>
+<!-- JS Custom -->
+<!-- build:js assets/js/theme.min.js -->
+<script src="assets/js/theme.js"></script>
+<!-- endbuild -->
+<script src="assets/js/custom.js"></script>
 
-  </body>
-</html>
