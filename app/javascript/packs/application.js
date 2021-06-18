@@ -29,5 +29,5 @@ import "parallax";
 require("../vendor/alerts/alert");
 require("../vendor/contact/contact");
 require("../vendor/reservation/reservation");
-require("~/app/javascript/src/theme");
+require("../src/theme");
 require("../src/theme.min");

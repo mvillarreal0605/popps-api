@@ -12947,7 +12947,7 @@ input[type='time'].form-control-sm
     top: 50%;
     left: 50%;
 
-    content: url(../img/icon_plus.svg);
+    content: url('https://simpleqode.bitbucket.io/touche/assets/img/icon_plus.svg');
     transition: opacity .3s;
     transform: translate(-50%, -50%);
 
@@ -12980,7 +12980,7 @@ input[type='time'].form-control-sm
 
 .lb-data .lb-close
 {
-    background: url(../img/icon_close.svg) no-repeat center center;
+    background: url('https://simpleqode.bitbucket.io/touche/assets/img/icon_close.svg') no-repeat center center;
 }
 
 .lb-nav a.lb-prev
@@ -13011,7 +13011,7 @@ input[type='time'].form-control-sm
     top: 50%;
     right: 30px;
 
-    content: url(../img/icon_next.svg);
+    content: url('https://simpleqode.bitbucket.io/touche/assets/img/icon_next.svg');
     transform: translateY(-50%);
 }
 
@@ -13685,7 +13685,7 @@ body
 {
     min-height: 500px;
 
-    background: url(../img/19.jpg) no-repeat center center/cover;
+    background: url('19') no-repeat center center/cover;
 }
 @media (min-width: 768px)
 {
