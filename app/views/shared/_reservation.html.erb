@@ -1,16 +1,16 @@
 <section class="section section_reservation section_gray" id="section_reservation">
-  <div class="container">
+  <div class="container" id="demo">
     <div class="row">
       <div class="col">
 
         <!-- Heading -->
         <h2 class="section__heading text-center">
-        Make online reservation
+        Schedule a demo
         </h2>
 
         <!-- Subheading -->
         <p class="section__subheading text-center">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
+          Demos will be approved upon acceptance. Let us know what date and time work best for you and we will be in touch soon.
         </p>
 
       </div>
@@ -43,6 +43,11 @@
             <div class="col-md-6">
 
               <div class="form-group">
+                <label class="sr-only" for="reservation__form__email">Organization</label>
+                <input type="email" class="form-control" id="reservation__form__email" name="reservation__form__email" placeholder="T-Bones Baseball">
+                <div class="invalid-feedback"></div>
+              </div>
+              <!-- <div class="form-group">
                 <label class="sr-only" for="reservation__form__people">People</label>
                 <select class="form-control" id="reservation__form__people" name="reservation__form__people">
                   <option value="1">1 person</option>
@@ -52,7 +57,7 @@
                   <option value="5">5 persons</option>
                 </select>
                 <div class="invalid-feedback"></div>
-              </div>
+              </div> -->
               <div class="form-group">
                 <label class="sr-only" for="reservation__form__date">Date</label>
                 <input type="date" class="form-control" id="reservation__form__date" name="reservation__form__date" value="2016-12-31">

@@ -26,8 +26,10 @@ import "lightbox";
 import "lightbox/assets/styles/main.scss";
 import "lightbox/assets/fontello/css/glyph.css";
 import "parallax";
-require("../vendor/alerts/alert");
-require("../vendor/contact/contact");
-require("../vendor/reservation/reservation");
-require("../src/theme");
-require("../src/theme.min");
+require("alert");
+require("contact");
+require("reservation");
+require("theme");
+require("theme.min");
+
+console.log("Hello from app/javascript/packs/application.js!");

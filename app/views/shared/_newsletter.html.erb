@@ -1,4 +1,4 @@
-<section class="section section_gray section_newsletter">
+<section class="section section_gray section_newsletter" id="newsletter">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -40,6 +40,52 @@
             </div>
           </form>
         </div> <!-- #mc_embed_signup -->
+
+      </div>
+    </div> <!-- / .row -->
+  </div> <!-- / .container -->
+</section>
+
+<!--
+  MailChimp newsletters generally cannot be used more than
+  once on a page, because this will cause HTML IDs conflict.
+  This section solves this problem by calling the
+  original sign-up form and imitating its behaviour. Please
+  don't use it without the original sign-up form. Remove
+  d-none to make it visible.
+-->
+<section class="section section_gray section_newsletter d-none">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+        <!-- Heading -->
+        <h2 class="section__heading section_newsletter__heading text-center">
+          Newsletter
+        </h2>
+        <p class="section__subheading text-center">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam illo praesentium sequi in cum, beatae maiores quae qui.
+        </p>
+
+      </div>
+    </div> <!-- / .row -->
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+
+        <!-- Form -->
+        <form class="section_newsletter__form section_newsletter__form_clone">
+          <div class="row">
+            <div class="form-group col-md-9">
+              <label class="sr-only">E-mail address</label>
+              <input type="email" class="form-control" placeholder="Email address">
+            </div>
+            <div class="col-md-3 text-center">
+              <button type="submit" class="btn btn-primary">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </form>
 
       </div>
     </div> <!-- / .row -->
