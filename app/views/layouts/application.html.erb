@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Precise-Play</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <title>Precise Play</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" /> rails general -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!-- bs custom -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/ico/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans&family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+    <meta name="msapplication-config" content="assets/ico/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- CSS Plugins -->
+    <!-- <link rel="stylesheet" href="assets/stylesheets/plugins/font-awesome/css/all.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/stylesheets/plugins/lightbox/css/lightbox.min.css"> -->
+    <!-- <link rel="stylesheet" href="assets/stylesheets/plugins/flickity/flickity.min.css"> -->
+
+    <!-- CSS Global -->
+    <!-- build:css assets/css/theme.min.css -->
+    <!-- endbuild -->
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag 'popps-white' %>
@@ -16,7 +30,5 @@
     <%= yield %>
     <%= javascript_pack_tag 'application' %>
     <%= javascript_pack_tag 'navLinks' %>
-    <%= javascript_pack_tag 'updateNav' %>
-    <%= javascript_pack_tag 'inquiryErrors' %>
   </body>
 </html>

@@ -1,0 +1,111 @@
+<section class="section section_menu section_border_bottom" id="products">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+
+        <!-- Heading -->
+        <h2 class="section__heading text-center">
+          The Lineup
+        </h2>
+        <p class="section__subheading text-center">
+          Our current product lineup constists of a series of machines each offering the minimum tracking speed, and ranging up to tracking location and sharing session data.
+        </p>
+
+      </div>
+    </div> <!-- / .row -->
+    <div class="row">
+      <div class="col">
+
+        <!-- Navigation -->
+        <nav class="section_menu__nav">
+          <ul>
+            <li class="active">
+              <a href="#menu_images" data-filter=".mains">Speed Only</a>
+            </li>
+            <li>
+              <a href="#menu_images" data-filter=".lunch">DPA - Radar</a>
+            </li>
+            <li>
+              <a href="#menu_images" data-filter=".dinner">DPA - Laser</a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </div>
+    <div class="row section_menu__grid" id="menu_images">
+
+      <div class="col-md-6 section_menu__grid__item mains">
+        <div class="section_menu__item">
+          <div class="row">
+            <div class="col-3 align-self-center">
+              <div class="section_menu__item__img">
+                <!-- <img src="assets/img/26.jpg" alt="..."> -->
+                <%= image_tag "speed_only", alt: "alttext" %>
+              </div>
+            </div>
+            <div class="col-7">
+              <h4>Speed Only Unit</h4>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, obcaecati! Sapiente laudantium.
+              </p>
+            </div>
+            <div class="col-2">
+              <div class="section_menu__item__price text-center">
+                $15
+              </div>
+            </div>
+          </div> <!-- / .row -->
+        </div>
+      </div>
+      <div class="col-md-6 section_menu__grid__item lunch">
+        <div class="section_menu__item">
+          <div class="row">
+            <div class="col-3 align-self-center">
+              <div class="section_menu__item__img">
+                <!-- <img src="assets/img/31.jpg" alt="..."> -->
+                <%= image_tag "pitch_analyzer", alt: "alttext" %>
+              </div>
+            </div>
+            <div class="col-7">
+              <h4>DPA - Radar</h4>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, obcaecati! Sapiente laudantium.
+              </p>
+            </div>
+            <div class="col-2">
+              <div class="section_menu__item__price text-center">
+                $23
+              </div>
+            </div>
+          </div> <!-- / .row -->
+        </div>
+      </div>
+      <div class="col-md-6 section_menu__grid__item dinner">
+        <div class="section_menu__item">
+          <div class="row">
+            <div class="col-3 align-self-center">
+              <div class="section_menu__item__img">
+                <!-- <img src="assets/img/27.jpg" alt="..."> -->
+                <%= image_tag "pitch_analyzer", alt: "alttext" %>
+              </div>
+            </div>
+            <div class="col-7">
+              <h4>DPA - Laser</h4>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Modi, obcaecati! Sapiente laudantium.
+              </p>
+            </div>
+            <div class="col-2">
+              <div class="section_menu__item__price text-center">
+                $16
+              </div>
+            </div>
+          </div> <!-- / .row -->
+        </div>
+      </div>
+
+
+    </div> <!-- / .row -->
+  </div> <!-- / .container -->
+</section>

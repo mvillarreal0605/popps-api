@@ -1,28 +1,56 @@
-<div class="navbar navbar-expand-sm navbar-dark navbar-custom fixed-top" id="bs-navbar">
-  <div class="nav_link">
-    <%= link_to '#top' do %>
-      <%= image_tag "popps-white", class: "avatar" %>
-    <% end %>
-  </div>
+<nav class="navbar navbar-light navbar-expand-lg fixed-top">
+  <div class="container">
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <!-- Navbar: Brand -->
+    <a class="navbar-brand d-lg-none" href="index.html">Precise Play</a>
 
+    <!-- Navbar: Toggler -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto" id="link-list">
-      <li class="nav-item nav_link">
-        <%= link_to "About", "#about", class: "nav-link" %>
-      </li>
-      <li class="nav-item nav_link">
-        <%= link_to "Baseball", "#baseball", class: "nav-link" %>
-      </li>
-      <li class="nav-item nav_link">
-        <%= link_to "Contact", "#contact", class: "nav-link" %>
-      </li>
-    </ul>
-  </div>
-</div>
+    <!-- Navbar: Collapse -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Navbar navigation: Left -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item nav_link">
+          <a class="nav-link" href="#about">About Us</a>
+        </li>
+        <li class="nav-item nav_link">
+          <a class="nav-link" href="#products">Products</a>
+        </li>
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="http://example.com" id="nav-item__menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Products
+          </a>
+          <div class="dropdown-menu" aria-labelledby="nav-item__menu">
+            <a class="dropdown-item" href="menu.html">Menu: Standard</a>
+            <a class="dropdown-item" href="menu_no-images.html">Menu: No Images</a>
+          </div>
+        </li> -->
+      </ul>
+
+      <!-- Navbar: Brand -->
+      <div class="nav_link">
+        <a class="navbar-brand d-none d-lg-flex" href="#home">
+          Precise Play
+        </a>
+      </div>
+
+      <!-- Navbar navigation: Right -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item nav_link">
+          <a class="nav-link" href="#demo">Schedule a Demo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#newsletter">News Letter</a>
+        </li>
+      </ul>
+
+    </div> <!-- / .navbar-collapse -->
+
+  </div> <!-- / .container -->
+</nav> <!-- / .navbar -->
 
 

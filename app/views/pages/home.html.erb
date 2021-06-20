@@ -1,65 +1,51 @@
 <%= render "shared/navbar" %>
 
-<div class="banner hp-image" id="top">
-  <div class="tagline">
-    <h1>Precise Play</h1>
-    <p>Progress... Proven.</p>
-  </div>
-</div>
+<%= render "shared/welcome" %>
 
-<%= render 'shared/flashes' %>
+<!-- DISCOVER
+================================================== -->
+<%= render "shared/discover" %>
 
-<div id="about" class="section">
-  <h2>About</h2>
-  <div class="container col-8">
-    <center>
-      <%= image_tag "popps-blue", alt: "popps logo", class: 'col-5 lg-img', id: 'diamond' %>
-    </center>
-    <br>
-    <div class="popps-row">
-      <%= image_tag "graph", alt: "strike-zone image" %>
+<!-- ABOUT
+================================================== -->
+<%= render "shared/about" %>
 
-      <h3 class="col-6" id="intro">Hello! We are Precise Play LLC, an engineering firm that specializes in sports related technology. We currently have a product lineup of various pitch analyzers. This lineup of technology allows baseball pitchers to keep track of every pitch during their practice sessions. Players can track this data, and their own personal progress through the Precise Play platform.</h3>
+<!-- MENU
+================================================== -->
+<%= render "shared/menu" %>
 
-      <!-- Hello! We are Precise Play LLC, an engineering firm that specializes in sports related technology. We currently have a product lineup of various pitch analyzers. This lineup of technology allows baseball pitchers to keep track of every pitch during their practice sessions. Players can track this data, and their own personal progress through the Precise Play platform. -->
-    </div>
-    <br>
-    <br>
-    <center>
-      <%= image_tag "diamond", alt: "baseball-diamond", class: 'col-7 lg-img', id: 'diamond' %>
-    </center>
-  </div>
-</div>
+<!-- RESERVATION
+================================================== -->
+<%= render "shared/reservation" %>
 
-<div id="baseball" class="section">
-  <h2>Baseball</h2>
-</div>
+<!-- NEWSLETTER
+================================================== -->
+<%= render "shared/newsletter" %>
 
-<div id="contact" class="section">
-  <h2>Contact</h2>
+<!-- FOOTER
+================================================== -->
+<%= render "shared/footer" %>
 
-  <div class="container col-8">
-    <div class="inquiry-form col-6">
-      <%= simple_form_for @inquiry do |f| %>
-        <h4><%= f.input :name, required: true, placeholder: 'John Doe' %></h4>
-        <div  class="inquiry-error" id="name-error"></div>
-        <br>
-        <h4><%= f.input :phone_number, required: true, placeholder: '816-555-5555' %></h4>
-        <div  class="inquiry-error" id="phone-error"></div>
-        <br>
-        <h4><%= f.input :email, required: true, placeholder: 'your.email@example.com' %></h4>
-        <div  class="inquiry-error" id="email-error"></div>
-        <br>
-        <h4><%= f.input :organization, placeholder: 'Are you with a team or academy?' %></h4>
-        <br>
-        <%= f.button :submit, "Submit Inquiry", class: "btn btn-flat", id: 'submit-inquiry' %>
-      <% end %>
-    </div>
-    <br>
-    <ul class="social">
-      <h1><li><i class="fab fa-facebook-square"></i></li></h1>
-      <h1><li><i class="fab fa-twitter-square"></i></li></h1>
-      <h1><li><i class="fab fa-instagram"></i></li></h1>
-    </ul>
-  </div>
-</div>
+<!-- JAVASCRIPT
+================================================== -->
+
+<!-- JS Global -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+<!-- <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnKt8_N4-FKOnhI_pSaDL7g_g-XI1-R9E"></script> -->
+
+<!-- JS Plugins -->
+<!-- <script src="assets/plugins/parallax/parallax.min.js"></script>
+<script src="assets/plugins/isotope/lib/imagesloaded.pkgd.min.js"></script>
+<script src="assets/plugins/isotope/isotope.pkgd.min.js"></script>
+<script src="assets/plugins/flickity/flickity.pkgd.min.js"></script>
+<script src="assets/plugins/lightbox/js/lightbox.min.js"></script>
+<script src="assets/plugins/reservation/reservation.js"></script>
+<script src="assets/plugins/alerts/alerts.js"></script> -->
+
+<!-- JS Custom -->
+<!-- build:js assets/js/theme.min.js -->
+<!-- <script src="assets/js/theme.js"></script> -->
+<!-- endbuild -->
+<!-- <script src="assets/js/custom.js"></script> -->
+
