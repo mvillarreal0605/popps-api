@@ -8,6 +8,10 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      devise_scope :user do
+        post "sign_up", to: "registrations#create"
+        post "sign_in", to: "auth_sessions#create"
+      end
       resources :user_relay_registrations, only: [ :index, :show, :update, :create, :destroy ]
       resources :users, only: [ :index, :show, :update, :create, :destroy ]
       resources :pitches, only: [ :index, :show, :update, :create, :destroy ]
