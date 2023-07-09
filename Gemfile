@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
+gem 'rails', '~> 7.0.4.1' 
 
 gem 'autoprefixer-rails' 
 gem 'bootsnap', '>= 1.4.2', require: false 
@@ -12,15 +13,14 @@ gem 'font-awesome-sass', '~> 5.6.1'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'psych', '< 4'
 gem 'puma', '~> 4.1'
-gem 'rails', '~> 7.0.4.1' 
+gem 'rack-cors'
 # gem 'redis', '~> 4.0'
 gem 'sass-rails', '>= 6'
 gem 'simple_form'
 gem 'simple_token_authentication'
 gem 'webpacker', '~> 4.0'
-gem 'rack-cors'
-gem 'psych', '< 4'
 
 
 group :development, :test do
