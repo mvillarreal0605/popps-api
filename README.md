@@ -1,5 +1,7 @@
 # README
 
+Note: See WorkLog.txt in this repo for notes on changes made.
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

@@ -3,6 +3,8 @@ class Api::V1::UsersController < Api::V1::BaseController
   before_action :set_user, only: [ :show, :update, :destroy ]
 
 
+  logger.info "UsersController"
+
   def index
     @users = User.all
   end
