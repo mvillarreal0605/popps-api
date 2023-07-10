@@ -1,13 +1,11 @@
 # README
 
-Note: See WorkLog.txt in this repo for notes on changes made.
-
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version  Using Ruby 3.1.2 and Rails 7.0.4.1
 
 * System dependencies
 
