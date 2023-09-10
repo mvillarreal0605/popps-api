@@ -8,10 +8,12 @@ gem 'autoprefixer-rails'
 gem 'bootsnap', '>= 1.4.2', require: false 
 gem 'bootstrap-sass', '~> 3.4.1' 
 gem 'devise' 
+gem 'devise-jwt'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'main'
 gem 'font-awesome-sass', '~> 5.6.1'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.7'
+gem 'jsonapi-serializer'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'psych', '< 4'
 gem 'puma', '~> 4.1'
@@ -21,8 +23,6 @@ gem 'sass-rails', '>= 6'
 gem 'simple_form'
 gem 'webpacker', '~> 4.0'
 
-gem 'devise-jwt'
-gem 'jsonapi-serializer'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -35,9 +35,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  # ...fixes failure of rails generate migration....
   gem 'spring', '~> 4.1'
-  # gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do

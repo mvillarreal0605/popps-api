@@ -1,16 +1,8 @@
 class Api::V1::UserRelayRegistrationsController < Api::V1::BaseController
   require 'jwt'
   before_action :authenticate_user!
-  # acts_as_token_authentication_handler_for User, except: [ :index, :show ]
   before_action :set_rrt, only: [ :show, :update, :destroy ]
 
-  
-
-  #  ?? 
-  #  - How to check JWT_UAT user_id  vs  params.user_id ??
-  #    => check current_user.user_id vs rrt_params.user_id
-  #  - How to leave out  index ?? ... comment out ...
-  #
   
 
   def index
