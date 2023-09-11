@@ -8,10 +8,12 @@ gem 'autoprefixer-rails'
 gem 'bootsnap', '>= 1.4.2', require: false 
 gem 'bootstrap-sass', '~> 3.4.1' 
 gem 'devise' 
+gem 'devise-jwt'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'main'
 gem 'font-awesome-sass', '~> 5.6.1'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.7'
+gem 'jsonapi-serializer'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'psych', '< 4'
 gem 'puma', '~> 4.1'
@@ -19,7 +21,6 @@ gem 'rack-cors'
 # gem 'redis', '~> 4.0'
 gem 'sass-rails', '>= 6'
 gem 'simple_form'
-gem 'simple_token_authentication'
 gem 'webpacker', '~> 4.0'
 
 
@@ -34,8 +35,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring', '~> 4.1'
 end
 
 group :test do
