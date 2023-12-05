@@ -1,0 +1,19 @@
+meta {
+  name: Deregister
+  type: http
+  seq: 12
+}
+
+delete {
+  url: http://localhost:3000/api/v1/deregister
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "user_relay_registration": {
+      "jwt_rrt": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3BvcHBzLmNvbSIsInN1YiI6IjFmOTUzYTI2YzcxNTg4MzJiNWI2ZjQ0NmNiYTQzM2Q1YTRlNzgyZWU3MWMyMTk0N2ZiZTI0NmQzNTM1M2YzM2YkJG9BbFN4Q09SaVVlQ3JPL0lCYUlCRGNvOGhqSk1QTHRIL2FhZzBxdTVVZldDNEljNXdKKzhXUW9uSWFUc1lSRjF4RUtSYnNCajltMmpDTW80cTJQckhpSWstLVJBaUwzS1RPTXNIbkp2UUYtLU9lT3p6T2dFV0N4bU1BTTdHNVY3WEE9PSIsInBvcHBzX3R5cGUiOiJycnQifQ.k6qrYps2PossyuiSCP9juB4rl1tMFBRyLUYu_9oYIwk"
+    }
+  }
+}

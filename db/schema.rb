@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_21_190928) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_08_193135) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_21_190928) do
     t.datetime "update_time", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id", "device_guid"], name: "index_user_relay_registrations_on_user_id_and_device_guid", unique: true
   end
 
   create_table "users", force: :cascade do |t|

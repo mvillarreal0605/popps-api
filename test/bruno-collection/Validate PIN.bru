@@ -1,0 +1,20 @@
+meta {
+  name: Validate PIN
+  type: http
+  seq: 11
+}
+
+post {
+  url: http://localhost:3000/api/v1/validatepin
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "user": {
+          "user_id": "janes",
+          "pin": "1111"
+      }
+  }
+}

@@ -1,34 +1,45 @@
 class Api::V1::UserRelayRegistrationsController < Api::V1::BaseController
+  include RefreshableAuth
+  require 'fmt_utl.rb'
   require 'jwt'
-  before_action :authenticate_user!
-  before_action :set_rrt, only: [ :show, :update, :destroy ]
+  before_action :authenticate_user!, only: [ :index, :show, :create, :update, :deletebykey ]
+  before_action :set_rrt, only: [ :show, :update, :deletebykey ]
 
-  
+
 
   def index
-    # @user_relay_registrations = UserRelayRegistration.all
+    if current_user.admin_flg 
+      @user_relay_registrations = UserRelayRegistration.all
+      render json: @user_relay_registrations
+    end
   end
 
   def show
-    logger.info "UserRelayRegistrations::show() for authenticated user: #{current_user.user_id} "
     render json: @rrt
   end
 
   def create
-   logger.info "Api::V1::UserRelayRegistrationsController:create()"
-   logger.info "...current_user: #{current_user.inspect}"
-   logger.info "...rrt_params: #{rrt_params.inspect}"
 
-   @rrt = UserRelayRegistration.new(rrt_params)
-    logger.info "...@rrt: #{@rrt.inspect}"
+    @rrt = UserRelayRegistration.new(rrt_params)
+    logger.info "...current_user.user_id:(#{current_user.user_id})"
+    logger.info "...@rrt.user_id:(#{@rrt.user_id})"
 
-    if (current_user.user_id == @rrt.user_id && @rrt.save)
-      # compute RRT_JWT and return it.
-      tkn = new_rrt_jwt  @rrt.user_id, @rrt.device_guid 
-      render json: {rrt_jwt: tkn, status: :created}
-      # render :show, status: :created
+    if (current_user.user_id == @rrt.user_id)
+      if @rrt.save
+        # compute RRT_JWT and return it.
+        tkn = new_rrt_jwt  @rrt.user_id, @rrt.device_guid 
+        render json: {jwt_rrt: tkn, status: :created}
+        # render :show, status: :created
+      else
+        logger.info "...@rrt.save is false"
+        @rrt.errors.full_messages.each do |msg|
+          logger.info "...@rrt.error: #{msg}"
+        end
+        render_error POPPS::InvalidState
+      end
     else
-      render_error
+      logger.info "...user_ids do not match"
+      render_error POPPS::InvalidCredentials
     end
   end
 
@@ -36,19 +47,64 @@ class Api::V1::UserRelayRegistrationsController < Api::V1::BaseController
     if @rrt.update(rrt_params)
       render :show
     else
-      render_error
+      render_error POPPS::ServerError
     end
   end
 
-  def destroy
-    @rrt.destroy
-    head :no_content
+  # authenticated user sends device_guid: in body...
+  def deletebykey
+    if @rrt 
+      @rrt.destroy
+      render json: {status: :deleted}
+    else
+      render_error POPPS::ServerError
+    end
   end
+
+  # relay dvc sends: rrt_jwt in body...
+  def deregister
+    # use RefreshableAuth::check_rrt_jwt returns {status:, user_id:, device_guid: }
+    rrt_hsh = check_rrt_jwt(rrt_check_params[:jwt_rrt])
+    @rrt = UserRelayRegistration.find_by user_id: rrt_hsh[:user_id], device_guid: rrt_hsh[:device_guid]
+    @rrt.destroy
+    if @rrt
+      render json: {status: :deregistered}
+    else
+      render_error POPPS::ServerError
+    end
+  end
+
+  def check
+
+    # Input format: popps_body = "{device_guid: deviceUuid, rrtokens: ["jwt1" "jwt2" ...]}
+    # Return format: {device_guid:dvc_guid, missing:[uidx,uidy,..,uid99]}
+
+    relay_guid = rrt_check_params[:device_guid]
+    rrts = rrt_check_params[:rrtokens]
+    missing = []
+
+    rrts.each do |rrt| 
+      # decode rrt to get user_id
+      # attempt user_relay_registrations lookup (relay_guid, user_id)
+      # if Failed, add user_id to missing[]
+      rrt_hsh = check_rrt_jwt(rrt)    # use RefreshableAuth::check_rrt_jwt returns {status:, user_id:, device_guid: }
+      if rrt_hsh[:status] == false    # return invalid rrt-s for removal from reg list.
+        missing.append( [rrt] )
+      else
+        xrrt = UserRelayRegistration.find_by_user_id_and_device_guid(rrt_hsh[:user_id], rrt_hsh[:device_guid])
+        if !xrrt     # lookup failed"
+          missing.append( [rrt] )
+        end
+      end
+    end
+    render json: { device_guid: rrt_check_params[:device_guid], missing: missing}
+  end
+
 
   private
 
   def set_rrt
-    @rrt = UserRelayRegistration.find(params[:id])
+    @rrt = UserRelayRegistration.find_by_user_id_and_device_guid(current_user.user_id, rrt_params[:device_guid])
   end
 
   def rrt_params
@@ -56,54 +112,15 @@ class Api::V1::UserRelayRegistrationsController < Api::V1::BaseController
           :device_guid, :device_description, :usage_count)
   end
 
-  def render_error
-    render json: { errors: @rrt.errors.full_messages },
-      status: :unprocessable_entity
+ def rrt_check_params
+   # params.require(:user_relay_registration).permit(:device_guid, :rrtokens )
+   # Note: .permit(... :rrtokens) returns an error - appears to test for defined fields ??
+   params.require(:user_relay_registration)
   end
 
-  def encrypt text
-    text = text.to_s unless text.is_a? String
-
-    len   = ActiveSupport::MessageEncryptor.key_len
-    salt  = SecureRandom.hex len
-    key   = ActiveSupport::KeyGenerator.new(
-            Rails.application.secrets.secret_key_base).generate_key salt, len
-    crypt = ActiveSupport::MessageEncryptor.new key
-    encrypted_data = crypt.encrypt_and_sign text
-    "#{salt}$$#{encrypted_data}"
-  end
-
-  def decrypt text
-    salt, data = text.split "$$"
-
-    len   = ActiveSupport::MessageEncryptor.key_len
-    key   = ActiveSupport::KeyGenerator.new(
-            Rails.application.secrets.secret_key_base).generate_key salt, len
-    crypt = ActiveSupport::MessageEncryptor.new key
-    crypt.decrypt_and_verify data
-  end
-
-
-  # Construct a New JWT for User Relay Registration - RRT
-  # Claims consist of:
-  #   iss: https://popps.com"
-  #   sub: ...encrypted user_id and device_guid Hash
-  #   popps_type: "rrt"
-  #
-  # Note: the expiration claim is OPTIONAL - leave it out for perpetual JWT.
-
-  def new_rrt_jwt(id, guid)
-
-    sub_hash = { user_id: @rrt.user_id, device_guid: @rrt.device_guid }
-    sub_tos = sub_hash.to_s
-    logger.info "...create() - sub_hsh.to_s: #{sub_tos}"
-    
-    enc_sub = encrypt sub_tos
-    logger.info "...create() - encrypt(sub_tos): #{enc_sub}"
-
-    payload = { iss: "https://popps.com", sub: enc_sub, popps_type: "rrt" }
-    hmac_secret = Rails.application.secrets.secret_key_base
-    token = JWT.encode payload, hmac_secret, 'HS256'
+  def render_error(err_defn)
+    render json: { errors:  FmtUtl.err_compose( err_defn, @rrt.errors.full_messages.to_s) },
+      status: POPPS::HTTP_InternalServerError
   end
 
 end

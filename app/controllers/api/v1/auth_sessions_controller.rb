@@ -1,5 +1,6 @@
 class Api::V1::AuthSessionsController < Devise::SessionsController
   include RackSessionsFix
+  include RefreshableAuth
   require 'jwt'
 
   respond_to :json
@@ -8,10 +9,10 @@ class Api::V1::AuthSessionsController < Devise::SessionsController
 
   # sign in
   def create
-    logger.info "login: params: create()"
-    if params[:user][:jwt_rrt]
-      #logger.info "...user.jwt_rrt: #{params[:user][:jwt_rrt]}"
-      current_user = User.find_by user_id: params[:user][:user_id]
+    logger.info "login: create() - params: #{params}"
+   if params[:user][:jwt_rrt]
+     #logger.info "...user.jwt_rrt: #{params[:user][:jwt_rrt]}"
+     current_user = User.find_by user_id: params[:user][:user_id]
 
       # Hash contents: {status: jwt_status, user_id: user_id, device_guid: device_guid}
       chk_hsh = check_rrt_jwt(params[:user][:jwt_rrt])
@@ -88,40 +89,4 @@ class Api::V1::AuthSessionsController < Devise::SessionsController
     crypt.decrypt_and_verify data
   end
 
-
-  
-  # De-construct the RRT JWT and check for valid format...
-  # Claims payload consists of:
-  #   iss: https://popps.com"
-  #   sub: ...encrypted user_id and device_guid Hash
-  #   popps_type: "rrt"
-  #
-  # Note: the expiration claim is OPTIONAL - leave it out for perpetual JWT.
-
-  def check_rrt_jwt(token)
-    hmac_secret = Rails.application.secrets.secret_key_base
-
-    payload = JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
-
-    # Note: payload is a 2 entry array - [claims, {"alg"=>"HS256}]
-    claims = payload[0]
-
-    if (claims["iss"] != "https://popps.com" || claims["popps_type"] != "rrt")
-      logger.info "...invalid iss or popps_type"
-      return {status: false}
-    end
-
-    dec_sub = decrypt claims["sub"]
-    logger.info "...check_rrt_jwt() - decrypt(claims[sub]): #{dec_sub}"
-
-    payload_hsh1 = eval(dec_sub)
-
-    uid = payload_hsh1[:user_id]
-    gid = payload_hsh1[:device_guid]
-    logger.info "...create() - user_id: #{uid} device_guid: #{gid}"
-  
-    {status: true, user_id: uid, device_guid: gid }
-
-  end
- 
 end

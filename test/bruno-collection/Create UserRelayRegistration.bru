@@ -1,0 +1,26 @@
+meta {
+  name: Create UserRelayRegistration
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3000/api/v1/user_relay_registrations
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MzkwODhhMy1hNGU1LTRlYjItYTIyMi1mOTYxYjQ0MzJmMzAiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzAxNzE4MjY1LCJleHAiOjE3MDE3MjE4NjV9.GIf6lOMY_IYh_mWOA1R3MCi1JOfdqSoHW9FrFGhXwEs
+}
+
+body:json {
+  {
+    "user_relay_registration": {
+      "user_id": "janes",
+      "device_guid": "xxx_device_guid_xxx",
+      "device_description": "Test relay device",
+      "usage_count": 0
+    }
+  }
+}

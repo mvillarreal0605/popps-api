@@ -1,0 +1,23 @@
+meta {
+  name: Delete By Key
+  type: http
+  seq: 10
+}
+
+delete {
+  url: http://localhost:3000/api/v1/deletebykey
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4MzkwODhhMy1hNGU1LTRlYjItYTIyMi1mOTYxYjQ0MzJmMzAiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzAxODEyOTI3LCJleHAiOjE3MDE4MTY1Mjd9.86DP0a2bJcTgiNpVI-TeTjElwHKNUMNYVbqGoU3nlE4
+}
+
+body:json {
+  {
+    "user_relay_registration": {
+      "device_guid": "8c376fb4-0b49-4102-9a9c-d18c6786323c"
+    }
+  }
+}

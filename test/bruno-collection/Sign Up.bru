@@ -1,0 +1,28 @@
+meta {
+  name: Sign Up
+  type: http
+  seq: 1
+}
+
+post {
+  url: localhost:3000/api/v1/sign_up
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "user": {
+          "user_id": "janes",
+          "password": "js1111",
+          "password_confirmation": "js1111",
+          "nick_name": "Jany",
+          "last_name": "Smith",
+          "first_name": "Jane",
+          "email": "janes0@gmail.com",
+          "cell_number": "123-456-7893",
+          "admin_flg": "FALSE",
+          "pin": "1111"
+      }
+  }
+}

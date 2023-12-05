@@ -1,16 +1,18 @@
 class Api::V1::UsersController < Api::V1::BaseController
-  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
-  before_action :set_user, only: [ :show, :update, :destroy ]
-
+  before_action :authenticate_user!, only: [ :index, :show, :update, :destroy ]
+  before_action :set_user, only: [ :index, :show, :update, :destroy ]
 
   logger.info "UsersController"
 
   def index
-    @users = User.all
+    if @user.admin_flg 
+      @users = User.all
+    end
   end
 
   def show
-
+    logger.info "... show: current_user: #{current_user}"
+    render json: @user
   end
 
   def create
@@ -35,10 +37,20 @@ class Api::V1::UsersController < Api::V1::BaseController
     head :no_content
   end
 
+  def validatepin
+    @user = User.find_by(user_id: user_params[:user_id])
+    if (@user && (@user.pin.to_s == user_params[:pin] ))
+        render json: {pin: true}
+    else
+      render json: {pin: false}
+    end
+  end
+
+
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def user_params
