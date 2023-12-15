@@ -11,7 +11,7 @@ class Api::V1::UsersController < Api::V1::BaseController
   end
 
   def show
-    logger.info "... show: current_user: #{current_user}"
+    logger.info "... show: current_user: #{@user}"
     render json: @user
   end
 

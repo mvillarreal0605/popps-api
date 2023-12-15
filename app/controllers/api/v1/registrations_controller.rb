@@ -12,7 +12,7 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
 # def sign_up_params
 #       params.require(:user).permit(
 #         :user_id, :password, :password_confirmation, :nick_name, :last_name,
-#         :first_name, :email, :cell_number, :admin_flg, :pin)
+#         :first_name, :email, :cell_number, :admin_flg, :pin, :age_at_signup)
 #   end
    
    def ensure_params_exist

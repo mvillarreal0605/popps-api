@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       delete 'deletebykey', to: 'user_relay_registrations#deletebykey'
       resources :user_relay_registrations, only: [:index, :show, :update, :create, :destroy]
       get 'userinfo', to: 'users#show'
+      put 'userinfo', to: 'users#update'
       post 'validatepin', to: 'users#validatepin'
       resources :users, only: [ :index, :show, :update, :create, :destroy ]
       resources :pitches, only: [ :index, :show, :update, :create, :destroy ]

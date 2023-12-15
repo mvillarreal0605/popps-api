@@ -10,7 +10,8 @@ class Api::V1::AuthSessionsController < Devise::SessionsController
   # sign in
   def create
     logger.info "login: create() - params: #{params}"
-   if params[:user][:jwt_rrt]
+    logger.info "... - params[:auth_session]: #{params[:auth_session]}"
+    if params[:user][:jwt_rrt]
      #logger.info "...user.jwt_rrt: #{params[:user][:jwt_rrt]}"
      current_user = User.find_by user_id: params[:user][:user_id]
 
