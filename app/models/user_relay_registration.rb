@@ -1,3 +1,4 @@
 class UserRelayRegistration < ApplicationRecord
-  validates :device_guid,  uniqueness: { scope: :user_id}
+  belongs_to :user
+  validates :device_guid,  uniqueness: { scope: :user_id_code}
 end

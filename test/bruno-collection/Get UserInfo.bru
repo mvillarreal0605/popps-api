@@ -1,0 +1,15 @@
+meta {
+  name: Get UserInfo
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:3000/api/v1/userinfo
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0NThlZmNiNy1lYWU3LTQ5YWQtYTQ4Ny01Zjc2NTMxMTJhZmEiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzAzMzU0NTc0LCJleHAiOjE3MDMzNTgxNzR9.vORG3WSd17XvgpR3XjZaSUEARabqNsSeMLh30zC5hnc
+}

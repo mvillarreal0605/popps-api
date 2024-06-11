@@ -1,0 +1,23 @@
+meta {
+  name: UnRegisterUser
+  type: http
+  seq: 13
+}
+
+delete {
+  url: http://localhost:3000/api/v1/unregisteruser
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0NThlZmNiNy1lYWU3LTQ5YWQtYTQ4Ny01Zjc2NTMxMTJhZmEiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzA3MDk2MjAzLCJleHAiOjE3MDcwOTk4MDN9.--RReG202uSajjkG17uf82HZX6EHdWso3EFJSCIKN00
+}
+
+body:json {
+  {
+    "user_relay_registration": {
+      "jwt_rrt": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3BvcHBzLmNvbSIsInN1YiI6ImEyYzU0YThkNDlkYjBmMmQxMDYwNGFjY2VhNzQ2NGRkMzExNjIzMjA0N2ZiZWU0MTlkNWIwOWMwMzkyODVjZjckJGFRMU13dCsrYm5TQjZYYWdGNzNiOURIMmV3bE1OVU5MUjZjT29adVpyY1pHb29URG5OUzRGc1FkbVlNMkFCOG5IME5SZGhSWWcvRGROVEN0WnlqK2hhUUFRTHpTLS04OFE4ZGFvcmFjOSs3UnN5LS1KdEdQYW1XSk8yL3hsVVc1VzNvMXd3PT0iLCJwb3Bwc190eXBlIjoicnJ0In0.RWoWHfbucQ1DZbMZHZbu0Nmp620Cblqg384BWpJHvqU"
+    }
+  }
+}

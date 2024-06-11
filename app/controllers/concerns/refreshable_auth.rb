@@ -6,14 +6,14 @@ module RefreshableAuth
   # Construct a New JWT for User Relay Registration - RRT
   # Claims consist of:
   #   iss: https://popps.com"
-  #   sub: ...encrypted user_id and device_guid Hash
+  #   sub: ...encrypted user_id_code and device_guid Hash
   #   popps_type: "rrt"
   #
   # Note: the expiration claim is OPTIONAL - leave it out for perpetual JWT.
 
   def new_rrt_jwt(id, guid)
 
-    sub_hash = { user_id: id, device_guid: guid }
+    sub_hash = { user_id_code: id, device_guid: guid }
     sub_tos = sub_hash.to_s
     
     enc_sub = encrypt sub_tos
@@ -55,10 +55,12 @@ module RefreshableAuth
 
     payload_hsh1 = eval(dec_sub)
 
-    uid = payload_hsh1[:user_id]
+    logger.info "check_rrt_jwt():payload_hshs1:#{payload_hsh1}"
+
+    uid = payload_hsh1[:user_id_code]
     gid = payload_hsh1[:device_guid]
   
-    {status: true, user_id: uid, device_guid: gid }
+    {status: true, user_id_code: uid, device_guid: gid }
 
   end
 

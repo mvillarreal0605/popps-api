@@ -1,33 +1,30 @@
 class Api::V1::SessionsController < Api::V1::BaseController
 
-  respond_to :json
+  # respond_to :json
 
-  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
-  
+  # logger.info "...sessions - call authenticate_user!."
+  before_action :authenticate_user!, only: [ :index, :show, :create, :listfwd, :update, :destroy ]
   before_action :set_session, only: [ :show, :update, :destroy ]
 
-
+  logger.info "...sessions - Startup."
+ 
   def index
     @sessions = Session.all
   end
 
   def show
-
+    render status: :ok, json: @session
   end
 
   def create
-    @session = Session.new(session_params)
+    logger.info "...sessions - create method for user #{current_user}."
+    @session = current_user.sessions.create(session_params)
+    logger.info "...sessions - create @session."
     if @session.save
-      render :show, status: :created
+      logger.info "...sessions - created #{@session}."
+      render status: :ok, json: @session
     else
-      render_error
-    end
-  end
-
-  def update
-    if @session.update(session_params)
-      render :show
-    else
+      logger.info "...sessions - save failed: #{@session.errors.full_messages }"
       render_error
     end
   end
@@ -37,6 +34,23 @@ class Api::V1::SessionsController < Api::V1::BaseController
     head :no_content
   end
 
+  def listfwd
+    logger.info "...sessions - listfwd method for user #{current_user.last_name}."
+    logger.info "...sessions - listfwd with last_date: #{params[:last_date]} and count: #{params[:count]}" 
+    # this should be start_time instead of created_at ....
+    @sessions = current_user.sessions.where("created_at < ?", params[:last_date]).limit(params[:count])
+    render status: :ok, json: @sessions
+  end
+
+  def update
+    if @session.update(session_params)
+      render status: :ok, json: @session
+    else
+      render_error
+    end
+  end
+
+
   private
 
   def set_session
@@ -44,7 +58,9 @@ class Api::V1::SessionsController < Api::V1::BaseController
   end
 
   def session_params
-    params.require(:session).permit(:id, :relay_device_guid, :relay_description, :pitch_analyzer, :description, :current_session, :start_time, :pitcher_id, :create_time, :update_time)
+    params.require(:session).permit(:id, :relay_device_guid, :relay_description, :pitch_analyzer,
+                                    :description, :current_session, :start_time, :user_id_code, 
+                                    :create_time, :update_time, :last_date, :count)
   end
 
   def render_error

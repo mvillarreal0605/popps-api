@@ -1,0 +1,19 @@
+meta {
+  name: Relays Listfwd
+  type: http
+  seq: 15
+}
+
+get {
+  url: http://192.168.4.48:3000/api/v1/relays/listfwd?count=100
+  body: none
+  auth: bearer
+}
+
+query {
+  count: 100
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0NThlZmNiNy1lYWU3LTQ5YWQtYTQ4Ny01Zjc2NTMxMTJhZmEiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzA3MDk5NDMzLCJleHAiOjE3MDcxMDMwMzN9.kGpeJ9HR08yhGQKR06WDVIo3cVovQ4dySm7bEUyn60M
+}

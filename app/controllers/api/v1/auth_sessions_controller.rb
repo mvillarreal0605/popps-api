@@ -7,22 +7,25 @@ class Api::V1::AuthSessionsController < Devise::SessionsController
 
   protect_from_forgery with: :null_session
 
+  logger.info "Auth_sessions_controller"
+ 
   # sign in
   def create
     logger.info "login: create() - params: #{params}"
     logger.info "... - params[:auth_session]: #{params[:auth_session]}"
     if params[:user][:jwt_rrt]
-     #logger.info "...user.jwt_rrt: #{params[:user][:jwt_rrt]}"
-     current_user = User.find_by user_id: params[:user][:user_id]
+     logger.info "...user.jwt_rrt: #{params[:user][:jwt_rrt]}"
+     current_user = User.find_by user_id_code: params[:user][:user_id_code]
 
-      # Hash contents: {status: jwt_status, user_id: user_id, device_guid: device_guid}
+      # Hash contents: {status: jwt_status, user_id_code: user_id_code, device_guid: device_guid}
       chk_hsh = check_rrt_jwt(params[:user][:jwt_rrt])
+      logger.info "...chk_hsh: #{chk_hsh}"
       if (current_user == nil) || (chk_hsh[:status] == false)
         respond_with_error()
       else
-        if current_user.user_id == chk_hsh[:user_id] && params[:user][:relay_id] == chk_hsh[:device_guid]
+        if current_user.user_id_code == chk_hsh[:user_id_code] && params[:user][:relay_id] == chk_hsh[:device_guid]
           logger.info "...check the user_relay_registration entry..."
-          rrt = UserRelayRegistration.find_by user_id: chk_hsh[:user_id], device_guid: chk_hsh[:device_guid]
+          rrt = UserRelayRegistration.find_by user_id_code: chk_hsh[:user_id_code], device_guid: chk_hsh[:device_guid]
           if rrt != nil
             logger.info "...do the jwt_rrt login..."
             sign_in(:user, current_user)
@@ -35,7 +38,7 @@ class Api::V1::AuthSessionsController < Devise::SessionsController
         end
       end
 
-    else   #..convetional user_id & pwd login....
+    else   #..convetional user_id_code & pwd login....
       super
     end
   end

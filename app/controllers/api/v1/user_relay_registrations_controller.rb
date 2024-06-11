@@ -2,75 +2,87 @@ class Api::V1::UserRelayRegistrationsController < Api::V1::BaseController
   include RefreshableAuth
   require 'fmt_utl.rb'
   require 'jwt'
-  before_action :authenticate_user!, only: [ :index, :show, :create, :update, :deletebykey ]
-  before_action :set_rrt, only: [ :show, :update, :deletebykey ]
-
-
+  
+  before_action :authenticate_user!, only: [ :index, :show, :create, :update, 
+                                             :unregisteruser, :unregisterrelay, :listfwd ]
+  before_action :set_rrt, only: [ :show, :update, :unregisterrelay ]
 
   def index
     if current_user.admin_flg 
       @user_relay_registrations = UserRelayRegistration.all
-      render json: @user_relay_registrations
+      render status: :ok, json: @user_relay_registrations
+    else
+      render status: :unauthorized
     end
   end
 
   def show
-    render json: @rrt
+    render status: :ok, json: @rrt
   end
 
   def create
+    logger.info "...current_user.user_id_code:(#{current_user.user_id_code})"
+    logger.info "...rrt_params[:user_id_code]:(#{rrt_params[:user_id_code]})"
 
-    @rrt = UserRelayRegistration.new(rrt_params)
-    logger.info "...current_user.user_id:(#{current_user.user_id})"
-    logger.info "...@rrt.user_id:(#{@rrt.user_id})"
-
-    if (current_user.user_id == @rrt.user_id)
-      if @rrt.save
+    if (current_user.user_id_code == rrt_params[:user_id_code])
+      @rrt = current_user.user_relay_registrations.create(rrt_params)
+      if @rrt.valid?
         # compute RRT_JWT and return it.
-        tkn = new_rrt_jwt  @rrt.user_id, @rrt.device_guid 
-        render json: {jwt_rrt: tkn, status: :created}
-        # render :show, status: :created
+        tkn = new_rrt_jwt(@rrt.user_id_code, @rrt.device_guid)
+        render status: :ok, json: {jwt_rrt: tkn, status: :created}
       else
-        logger.info "...@rrt.save is false"
+        logger.info "...@rrt creation failed."
         @rrt.errors.full_messages.each do |msg|
           logger.info "...@rrt.error: #{msg}"
         end
-        render_error POPPS::InvalidState
+        render status: :internal_server_error, json: @rrt.errors
       end
     else
-      logger.info "...user_ids do not match"
-      render_error POPPS::InvalidCredentials
+      logger.info "...user_id_codes do not match"
+      render status: :unauthorized
     end
   end
 
   def update
     if @rrt.update(rrt_params)
-      render :show
+      render status: :ok
     else
-      render_error POPPS::ServerError
+      render status: :internal_server_error, json: @rrt.errors
     end
   end
 
-  # authenticated user sends device_guid: in body...
-  def deletebykey
+  # get relays for authenticated user....
+  def listfwd
+    regs = current_user.user_relay_registrations.first(params[:count].to_i) 
+    render status: :ok, json: regs
+  end
+
+
+  # authenticated user deletes registration from another relay - sends device_guid: in body...
+  #    ... user is removeing his registration from another phone ...
+  #
+  def unregisterrelay
     if @rrt 
       @rrt.destroy
-      render json: {status: :deleted}
+      render status: :ok, json: {status: :deleted}
     else
-      render_error POPPS::ServerError
+      render status: :internal_server_error, json: @rrt.errors
     end
   end
 
-  # relay dvc sends: rrt_jwt in body...
-  def deregister
-    # use RefreshableAuth::check_rrt_jwt returns {status:, user_id:, device_guid: }
+
+  # relay dvc sends: rrt_jwt in body ... which is decoded to get device_guid.
+  #     ... phone's owner is removeing another users from this phone ...
+  #
+  def unregisteruser
+    # use RefreshableAuth::check_rrt_jwt returns {status:, user_id_code:, device_guid: }
     rrt_hsh = check_rrt_jwt(rrt_check_params[:jwt_rrt])
-    @rrt = UserRelayRegistration.find_by user_id: rrt_hsh[:user_id], device_guid: rrt_hsh[:device_guid]
+    @rrt = UserRelayRegistration.find_by user_id_code: rrt_hsh[:user_id_code], device_guid: rrt_hsh[:device_guid]
     @rrt.destroy
     if @rrt
-      render json: {status: :deregistered}
+      render status: :ok, json: {status: :deregistered}
     else
-      render_error POPPS::ServerError
+      render status: :internal_server_error, json: @rrt.errors
     end
   end
 
@@ -84,31 +96,32 @@ class Api::V1::UserRelayRegistrationsController < Api::V1::BaseController
     missing = []
 
     rrts.each do |rrt| 
-      # decode rrt to get user_id
-      # attempt user_relay_registrations lookup (relay_guid, user_id)
-      # if Failed, add user_id to missing[]
-      rrt_hsh = check_rrt_jwt(rrt)    # use RefreshableAuth::check_rrt_jwt returns {status:, user_id:, device_guid: }
+      # decode rrt to get user_id_code
+      # attempt user_relay_registrations lookup (relay_guid, user_id_code)
+      # if Failed, add user_id_code to missing[]
+      rrt_hsh = check_rrt_jwt(rrt)    # use RefreshableAuth::check_rrt_jwt returns {status:, user_id_code:, device_guid: }
       if rrt_hsh[:status] == false    # return invalid rrt-s for removal from reg list.
         missing.append( [rrt] )
       else
-        xrrt = UserRelayRegistration.find_by_user_id_and_device_guid(rrt_hsh[:user_id], rrt_hsh[:device_guid])
+        logger.info "...Find_by_....user_id_code:#{rrt_hsh[:user_id_code]} and DeviceGuid:#{rrt_hsh[:device_guid]}"
+        xrrt = UserRelayRegistration.find_by user_id_code: rrt_hsh[:user_id_code], device_guid: rrt_hsh[:device_guid]
         if !xrrt     # lookup failed"
           missing.append( [rrt] )
         end
       end
     end
-    render json: { device_guid: rrt_check_params[:device_guid], missing: missing}
+    render status: :ok, json: { device_guid: rrt_check_params[:device_guid], missing: missing}
   end
 
 
   private
 
   def set_rrt
-    @rrt = UserRelayRegistration.find_by_user_id_and_device_guid(current_user.user_id, rrt_params[:device_guid])
+    @rrt = UserRelayRegistration.find_by user_id_code: current_user.user_id_code, device_guid: rrt_params[:device_guid]
   end
 
   def rrt_params
-    params.require(:user_relay_registration).permit(:id, :user_id,
+    params.require(:user_relay_registration).permit(:id, :user_id_code,
           :device_guid, :device_description, :usage_count)
   end
 
@@ -116,11 +129,6 @@ class Api::V1::UserRelayRegistrationsController < Api::V1::BaseController
    # params.require(:user_relay_registration).permit(:device_guid, :rrtokens )
    # Note: .permit(... :rrtokens) returns an error - appears to test for defined fields ??
    params.require(:user_relay_registration)
-  end
-
-  def render_error(err_defn)
-    render json: { errors:  FmtUtl.err_compose( err_defn, @rrt.errors.full_messages.to_s) },
-      status: POPPS::HTTP_InternalServerError
   end
 
 end
