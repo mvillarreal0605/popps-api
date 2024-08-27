@@ -3,9 +3,10 @@ class Api::V1::SessionsController < Api::V1::BaseController
   # respond_to :json
 
   # logger.info "...sessions - call authenticate_user!."
-  before_action :authenticate_user!, only: [ :index, :show, :create, :listfwd, :update, :destroy ]
-  before_action :set_session, only: [ :show, :update, :destroy ]
-
+  before_action :authenticate_user!, only: [ :index, :show, :create, :listfwd, :pitches, :update, :destroy ]
+  before_action :set_session, only: [ :show, :update, :destroy, :pitchlist ]
+  before_action :authorize_user, only: [ :show, :update, :destroy, :pitchlist ]
+ 
   logger.info "...sessions - Startup."
  
   def index
@@ -42,7 +43,14 @@ class Api::V1::SessionsController < Api::V1::BaseController
     render status: :ok, json: @sessions
   end
 
+  def pitchlist
+    logger.info "...sessions - pitchlist method for user #{current_user.last_name}."
+    @pitchlist = @session.pitches
+    render status: :ok, json: {session:  @session, pitches:  @session.pitches}
+  end
+
   def update
+    logger.info "SessionsController::update: #{session_params}" 
     if @session.update(session_params)
       render status: :ok, json: @session
     else
@@ -59,8 +67,14 @@ class Api::V1::SessionsController < Api::V1::BaseController
 
   def session_params
     params.require(:session).permit(:id, :relay_device_guid, :relay_description, :pitch_analyzer,
-                                    :description, :current_session, :start_time, :user_id_code, 
-                                    :create_time, :update_time, :last_date, :count)
+                                    :description, :current_session, :user_id_code, :created_at,
+                                    :updated_at )
+  end
+
+  def authorize_user
+    unless @session.user_id == current_user.id
+      render json: { errors: 'Not Authorized' }, status: :unauthorized
+    end
   end
 
   def render_error

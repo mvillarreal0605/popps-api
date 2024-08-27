@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_04_204654) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_03_212328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,14 +24,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_04_204654) do
   end
 
   create_table "pitches", force: :cascade do |t|
-    t.datetime "pitch_time", precision: nil
     t.integer "x"
     t.integer "y"
     t.integer "s"
     t.boolean "is_strike"
     t.text "sign"
-    t.datetime "create_time", precision: nil
-    t.datetime "update_time", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "session_id"
@@ -44,10 +41,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_04_204654) do
     t.text "pitch_analyzer"
     t.text "description"
     t.boolean "current_session"
-    t.datetime "start_time", precision: nil
     t.text "user_id_code"
-    t.datetime "create_time", precision: nil
-    t.datetime "update_time", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
@@ -77,8 +71,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_04_204654) do
     t.integer "age_at_signup"
     t.datetime "date_of_signup", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
     t.boolean "admin_flg"
-    t.datetime "create_time", precision: nil
-    t.datetime "update_time", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false

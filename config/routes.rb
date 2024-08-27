@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       put 'userinfo', to: 'users#update'
       post 'validatepin', to: 'users#validatepin'
       get  'sessions/listfwd', to: 'sessions#listfwd'
+      get  'sessions/pitchlist/:id', to: 'sessions#pitchlist'
       resources :users, only: [ :index, :show, :update, :create, :destroy ]
       resources :pitches, only: [ :index, :show, :update, :create, :destroy ]
       resources :sessions, only: [ :index, :show, :update, :create, :destroy ]

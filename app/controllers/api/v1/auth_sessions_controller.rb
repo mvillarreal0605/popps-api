@@ -27,7 +27,7 @@ class Api::V1::AuthSessionsController < Devise::SessionsController
           logger.info "...check the user_relay_registration entry..."
           rrt = UserRelayRegistration.find_by user_id_code: chk_hsh[:user_id_code], device_guid: chk_hsh[:device_guid]
           if rrt != nil
-            logger.info "...do the jwt_rrt login..."
+            logger.info "...do the jwt_rrt login:current_user... #{current_user.inspect}"
             sign_in(:user, current_user)
             respond_with(current_user)
           else
