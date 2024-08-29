@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_21_190928) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_03_212328) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,17 +24,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_21_190928) do
   end
 
   create_table "pitches", force: :cascade do |t|
-    t.datetime "pitch_time", precision: nil
     t.integer "x"
     t.integer "y"
     t.integer "s"
     t.boolean "is_strike"
     t.text "sign"
-    t.integer "session_id"
-    t.datetime "create_time", precision: nil
-    t.datetime "update_time", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "session_id"
+    t.index ["session_id"], name: "index_pitches_on_session_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -43,27 +41,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_21_190928) do
     t.text "pitch_analyzer"
     t.text "description"
     t.boolean "current_session"
-    t.datetime "start_time", precision: nil
-    t.text "pitcher_id"
-    t.datetime "create_time", precision: nil
-    t.datetime "update_time", precision: nil
+    t.text "user_id_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
   create_table "user_relay_registrations", force: :cascade do |t|
-    t.text "user_id"
+    t.text "user_id_code"
     t.text "device_guid"
     t.text "device_description"
-    t.integer "usage_count"
-    t.datetime "create_time", precision: nil
-    t.datetime "update_time", precision: nil
+    t.integer "usage_count", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_user_relay_registrations_on_user_id"
+    t.index ["user_id_code", "device_guid"], name: "index_user_relay_registrations_on_user_id_code_and_device_guid", unique: true
   end
 
   create_table "users", force: :cascade do |t|
-    t.text "user_id"
+    t.text "user_id_code"
     t.text "first_name"
     t.text "last_name"
     t.text "nick_name"
@@ -71,10 +69,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_21_190928) do
     t.text "passwd_hash"
     t.integer "pin"
     t.integer "age_at_signup"
-    t.datetime "date_of_signup", precision: nil
+    t.datetime "date_of_signup", precision: nil, default: -> { "CURRENT_TIMESTAMP" }
     t.boolean "admin_flg"
-    t.datetime "create_time", precision: nil
-    t.datetime "update_time", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email", default: "", null: false

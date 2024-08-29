@@ -1,28 +1,33 @@
 class Api::V1::AuthSessionsController < Devise::SessionsController
   include RackSessionsFix
+  include RefreshableAuth
   require 'jwt'
 
   respond_to :json
 
   protect_from_forgery with: :null_session
 
+  logger.info "Auth_sessions_controller"
+ 
   # sign in
   def create
-    logger.info "login: params: create()"
+    logger.info "login: create() - params: #{params}"
+    logger.info "... - params[:auth_session]: #{params[:auth_session]}"
     if params[:user][:jwt_rrt]
-      #logger.info "...user.jwt_rrt: #{params[:user][:jwt_rrt]}"
-      current_user = User.find_by user_id: params[:user][:user_id]
+     logger.info "...user.jwt_rrt: #{params[:user][:jwt_rrt]}"
+     current_user = User.find_by user_id_code: params[:user][:user_id_code]
 
-      # Hash contents: {status: jwt_status, user_id: user_id, device_guid: device_guid}
+      # Hash contents: {status: jwt_status, user_id_code: user_id_code, device_guid: device_guid}
       chk_hsh = check_rrt_jwt(params[:user][:jwt_rrt])
+      logger.info "...chk_hsh: #{chk_hsh}"
       if (current_user == nil) || (chk_hsh[:status] == false)
         respond_with_error()
       else
-        if current_user.user_id == chk_hsh[:user_id] && params[:user][:relay_id] == chk_hsh[:device_guid]
+        if current_user.user_id_code == chk_hsh[:user_id_code] && params[:user][:relay_id] == chk_hsh[:device_guid]
           logger.info "...check the user_relay_registration entry..."
-          rrt = UserRelayRegistration.find_by user_id: chk_hsh[:user_id], device_guid: chk_hsh[:device_guid]
+          rrt = UserRelayRegistration.find_by user_id_code: chk_hsh[:user_id_code], device_guid: chk_hsh[:device_guid]
           if rrt != nil
-            logger.info "...do the jwt_rrt login..."
+            logger.info "...do the jwt_rrt login:current_user... #{current_user.inspect}"
             sign_in(:user, current_user)
             respond_with(current_user)
           else
@@ -33,7 +38,7 @@ class Api::V1::AuthSessionsController < Devise::SessionsController
         end
       end
 
-    else   #..convetional user_id & pwd login....
+    else   #..convetional user_id_code & pwd login....
       super
     end
   end
@@ -88,40 +93,4 @@ class Api::V1::AuthSessionsController < Devise::SessionsController
     crypt.decrypt_and_verify data
   end
 
-
-  
-  # De-construct the RRT JWT and check for valid format...
-  # Claims payload consists of:
-  #   iss: https://popps.com"
-  #   sub: ...encrypted user_id and device_guid Hash
-  #   popps_type: "rrt"
-  #
-  # Note: the expiration claim is OPTIONAL - leave it out for perpetual JWT.
-
-  def check_rrt_jwt(token)
-    hmac_secret = Rails.application.secrets.secret_key_base
-
-    payload = JWT.decode token, hmac_secret, true, { algorithm: 'HS256' }
-
-    # Note: payload is a 2 entry array - [claims, {"alg"=>"HS256}]
-    claims = payload[0]
-
-    if (claims["iss"] != "https://popps.com" || claims["popps_type"] != "rrt")
-      logger.info "...invalid iss or popps_type"
-      return {status: false}
-    end
-
-    dec_sub = decrypt claims["sub"]
-    logger.info "...check_rrt_jwt() - decrypt(claims[sub]): #{dec_sub}"
-
-    payload_hsh1 = eval(dec_sub)
-
-    uid = payload_hsh1[:user_id]
-    gid = payload_hsh1[:device_guid]
-    logger.info "...create() - user_id: #{uid} device_guid: #{gid}"
-  
-    {status: true, user_id: uid, device_guid: gid }
-
-  end
- 
 end

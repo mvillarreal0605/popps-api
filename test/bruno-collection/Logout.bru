@@ -1,0 +1,15 @@
+meta {
+  name: Logout
+  type: http
+  seq: 9
+}
+
+delete {
+  url: localhost:3000/logout
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI1N2I5ZDAzMy0zZWMzLTRkNWItODk3Ny0wZGYwNzI2ODgwMTIiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNjk4MDI2NDM0LCJleHAiOjE2OTgwMzAwMzR9.fvVAS1UBl9h_688yPqimtDfQIo4DE819U6hcj_-WFho
+}

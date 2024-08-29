@@ -1,33 +1,31 @@
 class Api::V1::SessionsController < Api::V1::BaseController
 
-  respond_to :json
+  # respond_to :json
 
-  acts_as_token_authentication_handler_for User, except: [ :index, :show ]
-  
-  before_action :set_session, only: [ :show, :update, :destroy ]
-
-
+  # logger.info "...sessions - call authenticate_user!."
+  before_action :authenticate_user!, only: [ :index, :show, :create, :listfwd, :pitches, :update, :destroy ]
+  before_action :set_session, only: [ :show, :update, :destroy, :pitchlist ]
+  before_action :authorize_user, only: [ :show, :update, :destroy, :pitchlist ]
+ 
+  logger.info "...sessions - Startup."
+ 
   def index
     @sessions = Session.all
   end
 
   def show
-
+    render status: :ok, json: @session
   end
 
   def create
-    @session = Session.new(session_params)
+    logger.info "...sessions - create method for user #{current_user}."
+    @session = current_user.sessions.create(session_params)
+    logger.info "...sessions - create @session."
     if @session.save
-      render :show, status: :created
+      logger.info "...sessions - created #{@session}."
+      render status: :ok, json: @session
     else
-      render_error
-    end
-  end
-
-  def update
-    if @session.update(session_params)
-      render :show
-    else
+      logger.info "...sessions - save failed: #{@session.errors.full_messages }"
       render_error
     end
   end
@@ -37,6 +35,30 @@ class Api::V1::SessionsController < Api::V1::BaseController
     head :no_content
   end
 
+  def listfwd
+    logger.info "...sessions - listfwd method for user #{current_user.last_name}."
+    logger.info "...sessions - listfwd with last_date: #{params[:last_date]} and count: #{params[:count]}" 
+    # this should be start_time instead of created_at ....
+    @sessions = current_user.sessions.where("created_at < ?", params[:last_date]).limit(params[:count])
+    render status: :ok, json: @sessions
+  end
+
+  def pitchlist
+    logger.info "...sessions - pitchlist method for user #{current_user.last_name}."
+    @pitchlist = @session.pitches
+    render status: :ok, json: {session:  @session, pitches:  @session.pitches}
+  end
+
+  def update
+    logger.info "SessionsController::update: #{session_params}" 
+    if @session.update(session_params)
+      render status: :ok, json: @session
+    else
+      render_error
+    end
+  end
+
+
   private
 
   def set_session
@@ -44,7 +66,15 @@ class Api::V1::SessionsController < Api::V1::BaseController
   end
 
   def session_params
-    params.require(:session).permit(:id, :relay_device_guid, :relay_description, :pitch_analyzer, :description, :current_session, :start_time, :pitcher_id, :create_time, :update_time)
+    params.require(:session).permit(:id, :relay_device_guid, :relay_description, :pitch_analyzer,
+                                    :description, :current_session, :user_id_code, :created_at,
+                                    :updated_at )
+  end
+
+  def authorize_user
+    unless @session.user_id == current_user.id
+      render json: { errors: 'Not Authorized' }, status: :unauthorized
+    end
   end
 
   def render_error

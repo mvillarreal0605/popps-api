@@ -1,0 +1,24 @@
+meta {
+  name: Check RelayRegistrations
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost:3000/api/v1/relayscheck
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "user_relay_registration": {
+      "device_guid": "xxx_device_guid_xxy",
+      "rrtokens": [
+        "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3BvcHBzLmNvbSIsInN1YiI6IjcxNDU5MGQ1NGYzM2JkODIyYTdjMTAyODEwYzMwNDZiYWJlYjFlYzlhYzcyZDA0NGE3Njc0YzFhNTNjMWE2ZWIkJGxkYnJRSDVqSWg5WDN1eHFRRWFGcjBtQXpHc0lvRVUxNllZMk1LdU1QaVVsVng4NXJMQkgxaUEzeE5hVUxYcHpoNnRvN1M2QUE1UUEybkFHQWdwNHdEeFMtLWxwWUtKMWRFNmFCUElqYTEtLWR3L2kzUC9iWlMrYVBIdld5b1M2R3c9PSIsInBvcHBzX3R5cGUiOiJycnQifQ.BK8e0D4q3ayZvT1Tivuam0rTBOJv3RxWGmW5wdjjMtg",
+        "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3BvcHBzLmNvbSIsInN1YiI6ImVhZTVjMGVhOTBjZDdiODU2Zjg3ZDQ1OWVjOTg3ZmEwMDRmMWQ4MDBjNmQxZGU1NjlmOGU0YmQ4MDFlMDA1NjMkJC9Ya2ZQWlp4emYzNWJxM0JBOENmaGRYRnUrQzRHc2FxMWl0bW00eTdBdlE0dFRtb2dhRzgyM1diU0VXcFFERGp5eUZBblp1UWc5dEVwM2NjQVBzM3Q5QmgtLW5jYWZuY0d6N0xwZGNBQ0MtLUM1VGJVNzBDNjBLS2M2MzFUNTRqK3c9PSIsInBvcHBzX3R5cGUiOiJycnQifQ.TcJNw_OkBYC4eERyfBnxGQSKQFA8IcIA0oRpD4v64kU",
+        "Ima fake rrt"
+      ]
+    }
+  }
+}

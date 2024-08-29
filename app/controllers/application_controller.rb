@@ -11,12 +11,12 @@ class ApplicationController < ActionController::Base
 
     devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :nick_name, 
          :first_name, :email, :cell_number,
-         :admin_flg, :pin])
+         :admin_flg, :pin, :age_at_signup])
 
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:user_id, :password, 
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:user_id_code, :password, 
                                       :relay_id, :jwt_rrt])
 
-    devise_parameter_sanitizer.permit(:account_update, keys: [:user_id, :last_name,
+    devise_parameter_sanitizer.permit(:account_update, keys: [:user_id_code, :last_name,
           :nick_name, :first_name, :email, :cell_number, :admin_flg, :pin])
   end
 

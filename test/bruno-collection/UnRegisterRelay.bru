@@ -1,0 +1,23 @@
+meta {
+  name: UnRegisterRelay
+  type: http
+  seq: 12
+}
+
+delete {
+  url: http://localhost:3000/api/v1/unregisterrelay
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI0NThlZmNiNy1lYWU3LTQ5YWQtYTQ4Ny01Zjc2NTMxMTJhZmEiLCJzdWIiOiIzIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzA3MDk2MjAzLCJleHAiOjE3MDcwOTk4MDN9.--RReG202uSajjkG17uf82HZX6EHdWso3EFJSCIKN00
+}
+
+body:json {
+  {
+    "user_relay_registration": {
+      "device_guid": "eaf80db7-b76b-4a75-bd81-c5e6f1c8f475"
+    }
+  }
+}

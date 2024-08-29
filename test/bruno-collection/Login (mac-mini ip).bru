@@ -1,0 +1,21 @@
+meta {
+  name: Login (mac-mini ip)
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://192.168.4.48:3000/login
+  body: json
+  auth: none
+}
+
+body:json {
+  { 
+      "user": { 
+          "user_id_code": "admin", 
+          "password": "adminpwd" 
+      } 
+  }
+  
+}

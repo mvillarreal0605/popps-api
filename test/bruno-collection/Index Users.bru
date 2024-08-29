@@ -1,0 +1,15 @@
+meta {
+  name: Index Users
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:3000/api/v1/users
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJlOTI0MWM1ZS1lZWVkLTRhMGQtYjBmYS0yNmFiNzMyODQ5YzYiLCJzdWIiOiIxIiwic2NwIjoidXNlciIsImF1ZCI6bnVsbCwiaWF0IjoxNzAzOTcyNjc0LCJleHAiOjE3MDM5NzYyNzR9.OTbAcuxP86kaA4Bnn-4D-RfmqOZjsAWLzVvT55oIvGA
+}
